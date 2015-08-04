@@ -1,0 +1,10 @@
+#p input help="input sra file"
+
+### prolog
+module load SRA_Toolkit
+
+### epilog
+echo "Done fastq-dump"
+
+### main
+fastq-dump --gzip --split-files {{ input }}

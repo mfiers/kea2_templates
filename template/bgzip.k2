@@ -1,0 +1,10 @@
+#p input help="input"
+
+### prolog
+module load SAMtools/1.2-foss-2014a
+
+### epilog
+echo "Done bgzip"
+
+### main
+bgzip {{ input }}

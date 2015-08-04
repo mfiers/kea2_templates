@@ -1,0 +1,11 @@
+#p gtf
+#p output default=counts
+#p agg_on default=gene_name
+#p threads default=20 int
+#p input multi
+
+### main
+featureCounts \
+    -a {{ gtf }} -o {{ output }} -Q 10 \
+    -g {{ agg_on }} -T {{ threads }} \
+    {{ input|join(" ")|wordwrap(wrapstring=" \\\n    ") }}
