@@ -1,0 +1,4 @@
+#p input
+#p output default={{*}}.fq
+
+bamToFastq -i {i} {{input}} -fq {o} {{output}}
