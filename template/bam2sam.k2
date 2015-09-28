@@ -1,0 +1,4 @@
+#p input
+#p output default={{input|basename('.bam')}}.sam
+
+samtools view {i} {{input}} > {o} {{output}}

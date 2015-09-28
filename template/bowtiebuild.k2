@@ -1,0 +1,18 @@
+#p input help="input fq" io=i
+#p db help="db name"
+
+### prolog
+
+module load Bowtie2/2.2.5-foss-2014a
+
+### main
+
+# output files:
+#   - {o} {{db}}.1.bt2
+#   - {o} {{db}}.2.bt2
+#   - {o} {{db}}.3.bt2
+#   - {o} {{db}}.4.bt2
+#   - {o} {{db}}.rev.1.bt2
+#   - {o} {{db}}.rev.2.bt2
+
+bowtie2-build {i} {{input}} {{db}}

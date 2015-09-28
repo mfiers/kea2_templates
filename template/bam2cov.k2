@@ -1,0 +1,4 @@
+#p input
+#p genome
+
+bedtools genomecov -ibam {i} {{ input }} -bg -g {d} {{ genome }} > {o} {{ * }}.bed

@@ -1,0 +1,13 @@
+#p input
+
+## Output: {o} {{input}}.gz
+## Input: {i} {{ input }}
+
+module load pigz || true
+
+if (which pigz);
+then
+    pigz -9 {{ input }}
+else
+    gzip -9  {{ input }}
+fi

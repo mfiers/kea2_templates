@@ -1,0 +1,28 @@
+#p input help="input fq"
+#p db help="bowtie db"
+#p output default={{*}}.bam
+#p threads opt int help="no threads to run STAR with" default=8
+
+### prolog
+
+module load Bowtie2/2.2.5-foss-2014a
+module load SAMtools/1.2-foss-2014a
+
+### main
+
+# database files:
+#   - {d} {{db}}.1.bt2
+#   - {d} {{db}}.2.bt2
+#   - {d} {{db}}.3.bt2
+#   - {d} {{db}}.4.bt2
+#   - {d} {{db}}.rev.1.bt2
+#   - {d} {{db}}.rev.2.bt2
+
+bowtie2 --sensitive \
+	-p {{ threads }} \
+	-x {{db}} \
+	-U {i} {{ input }} \
+    | samtools view -Sh -q 10 - \
+    | samtools sort -T {{*}}.tmp -O sam - \
+    | samtools view -Sb - \
+    > {o} {{ output }}

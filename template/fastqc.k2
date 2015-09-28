@@ -5,4 +5,9 @@
 module load FastQC/0.11.3-Java-1.7.0_51
 
 ### main
-fastqc -o . -t {{ threads }} -q  {{ input }}
+
+# output files:
+#  - {o} ./{{id}}_fastqc.html
+#  - {o} ./{{id}}_fastqc.zip
+
+{x} fastqc -o . -t {{ threads }} -q {i} {{ input }}

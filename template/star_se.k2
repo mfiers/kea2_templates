@@ -1,5 +1,5 @@
 #p reads help="forward input fq"
-#p threads opt int help="no threads to run STAR with" default=8
+#p threads opt int help="no threads to run STAR with" default=16
 #p db help="STAR db folder"
 
 ### prolog
@@ -9,19 +9,20 @@ module load SAMtools/1.2-foss-2014a
 ### main
 
 # output files:
-# - {o} {{*}}Aligned.sortedByCoord.out.bam
-# - {o} {{*}}Chimeric.out.junction
-# - {o} {{*}}Chimeric.out.sam
-# - {o} {{*}}SJ.out.tab
+# - {o} {{g}}Aligned.sortedByCoord.out.bam
+# - {o} {{g}}Chimeric.out.junction
+# - {o} {{g}}Chimeric.out.sam
+# - {o} {{g}}SJ.out.tab
 
 # database files:
 # - {d} {{ db }}/SA
+# - {d} {{ db }}/SAindex
 # - {d} {{ db }}/Genome
 
-STAR --outSAMtype BAM SortedByCoordinate \
+{x} STAR --outSAMtype BAM SortedByCoordinate \
      --runThreadN {{ threads}} \
      --genomeDir {{ db }} \
-     --outFileNamePrefix {{*}} \
+     --outFileNamePrefix {{g}} \
      {% if reads.endswith('.gz') %} --readFilesCommand zcat {% endif %} \
      --chimSegmentMin 18 \
      --readFilesIn {i} {{ reads }}

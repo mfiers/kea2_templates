@@ -1,0 +1,10 @@
+#p input io=i
+#p output default={{g}}.count
+
+### prolog
+
+module load SAMtools/1.2-foss-2014a
+
+### main
+
+{x} samtools view {{input}} | cut -f 3 | uniq -c > {o} {{output}}

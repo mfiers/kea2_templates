@@ -1,11 +1,18 @@
-#p gtf
-#p output default=counts
-#p agg_on default=gene_name
+#!/usr/bin/env k2
+#p gtf io=d
+#p output default=counts.tsv io=o
+#p agg_on default=gene_name help="aggregate on this field, choose none to not aggregate"
 #p threads default=20 int
-#p input multi
+#p attribute default=exon
+#p quality default=10 int
+#p input multi io=i
 
 ### main
 featureCounts \
-    -a {{ gtf }} -o {{ output }} -Q 10 \
-    -g {{ agg_on }} -T {{ threads }} \
+    -a {{ gtf }} \
+    -o {{ output }} \
+    -Q {{ quality }} \
+    {% if agg_on == "none" %}-f {% else %}-g {{ agg_on }}{% endif %}\
+    -T {{ threads }} \
+    -t {{ attribute }} \
     {{ input|join(" ")|wordwrap(wrapstring=" \\\n    ") }}
