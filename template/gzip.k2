@@ -1,10 +1,14 @@
 #p input
 #p output default={{input}}.gz
 
-## Output: {o} {{input}}.gz
-## Input: {i} {{ input }}
+### prolog
 
 module load pigz || true
+
+### main
+
+## Output: {o} {{input}}.gz
+## Input: {i} {{ input }}
 
 if (which pigz);
 then
