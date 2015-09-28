@@ -1,4 +1,5 @@
 #p input
+#p output default={{input}}.gz
 
 ## Output: {o} {{input}}.gz
 ## Input: {i} {{ input }}
