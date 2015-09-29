@@ -6,8 +6,9 @@ module load FastQC/0.11.3-Java-1.7.0_51
 
 ### main
 
-# output files:
-#  - {o} ./{{id}}_fastqc.html
-#  - {o} ./{{id}}_fastqc.zip
+# output files: {% set base=input|basename('.gz')|basename('.fastq')|basename('.fq') %}
+#  basename: {{ base }}
+#  - {o} ./{{ base }}_fastqc.html
+#  - {o} ./{{ base }}_fastqc.zip
 
 {x} fastqc -o . -t {{ threads }} -q {i} {{ input }}
