@@ -12,7 +12,11 @@ module load pigz || true
 
 if (which pigz);
 then
-    pigz -9 {{ input }}
+    pigz -c -9 {{ input }} > {{ output }}
 else
-    gzip -9  {{ input }}
+    gzip -c -9  {{ input }} > {{ output }}
 fi
+
+### epilog_single
+
+echo "done {{ input }} -> {{ output }}"
